@@ -18,10 +18,10 @@ router.post('/games', (req, res) => {
 router.get('/games/:gameId', (req, res) => {
   try {
     const game = gamesService.get(req.params.gameId);
-    if(game){
-        res.json(game);
+    if (game){
+      res.json(game);
     } else {
-        res.status(404).send({error: 'game not found'});
+      res.status(404).send({error: 'game not found'});
     }
   } catch (error){
     res.status(400).send();
@@ -29,12 +29,12 @@ router.get('/games/:gameId', (req, res) => {
 });
 
 // reveal a cell
-router.get('/games/:gameId/cells/:cellId/reveal', (req, res) => {
+router.post('/games/:gameId/cells/:cellId/reveal', (req, res) => {
   res.status(501).send({error: 'Not implemented'});
 });
 
 // tag a cell
-router.get('/games/:gameId/cells/:cellId/reveal', (req, res) => {
+router.post('/games/:gameId/cells/:cellId/reveal', (req, res) => {
   res.status(501).send({error: 'Not implemented'});
 });
 
