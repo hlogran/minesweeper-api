@@ -2,6 +2,7 @@
 
 const uuidv1 = require('uuid/v1');
 const Cell = require('./cell');
+const {GAME_STATES} = require('../../constants');
 
 module.exports = class Game {
   constructor(rows = 5, cols = 5, bombs = 5) {
@@ -26,6 +27,7 @@ module.exports = class Game {
     this.cols = cols;
     this.bombs = bombs;
     this.cells = [];
+    this.state = GAME_STATES.UNINITIALIZED;
 
     for (let row = 0; row < rows; row++){
       for (let col = 0; col < cols; col++){
