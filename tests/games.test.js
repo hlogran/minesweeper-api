@@ -47,5 +47,14 @@ describe('POST /games', () => {
 
     expect(db.getGames().length).toBe(0);
   });
+
+  test('Can\'t create a game with more bombs than (cells - 1)', async() => {
+    await server
+        .post('/games')
+        .send({rows: 2, cols: 2, bombs: 5})
+        .expect(400);
+
+    expect(db.getGames().length).toBe(0);
+  });
 });
 
