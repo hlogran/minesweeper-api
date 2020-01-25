@@ -1,7 +1,7 @@
 'use strict';
 
 const express = require('express');
-const router = new express.Router;;
+const router = new express.Router; ;
 const gamesService = require('../../services/games.js');
 
 // start a game
@@ -16,7 +16,16 @@ router.post('/games', (req, res) => {
 
 // get a game
 router.get('/games/:gameId', (req, res) => {
-  res.status(501).send({error: 'Not implemented'});
+  try {
+    const game = gamesService.get(req.params.gameId);
+    if(game){
+        res.json(game);
+    } else {
+        res.status(404).send({error: 'game not found'});
+    }
+  } catch (error){
+    res.status(400).send();
+  }
 });
 
 // reveal a cell
