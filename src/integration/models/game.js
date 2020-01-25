@@ -5,6 +5,22 @@ const Cell = require('./cell');
 
 module.exports = class Game {
   constructor(rows = 5, cols = 5, bombs = 5) {
+    if (rows < 1){
+      throw new Error('Number of rows not valid');
+    }
+
+    if (cols < 1){
+      throw new Error('Number of cols not valid');
+    }
+
+    if (bombs < 0){
+      throw new Error('Number of bombs not valid');
+    }
+
+    if (bombs > (rows * cols - 1)){
+      throw new Error('Number of bombs cant be higher than (rows * cols - 1)');
+    }
+
     this.id = uuidv1();
     this.rows = rows;
     this.cols = cols;

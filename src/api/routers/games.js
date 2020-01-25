@@ -1,11 +1,17 @@
 'use strict';
 
 const express = require('express');
-const router = new express.Router;
+const router = new express.Router;;
+const gamesService = require('../../services/games.js');
 
 // start a game
 router.post('/games', (req, res) => {
-  res.status(501).send({error: 'Not implemented'});
+  try {
+    const game = gamesService.add(req.body);
+    res.json(game);
+  } catch (error){
+    res.status(400).send({error: error.message});
+  }
 });
 
 // get a game
