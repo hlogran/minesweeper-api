@@ -3,6 +3,7 @@
 const db = require('../../src/integration/db.js');
 const Game = require('../../src/integration/models/game.js');
 const {CELL_STATES} = require('../../src/constants');
+const getAdjacentCells = require('../../src/utils/getAdjacentCells');
 
 module.exports = {
   clearGames: () => {
@@ -11,14 +12,14 @@ module.exports = {
   getGames: () => {
     return db.games;
   },
-  createTestGame: () => {
+  createTestGame: function() {
     const game = new Game(5, 5, 0);
 
-    game.cells[3].hasBomb = true;
-    game.cells[8].hasBomb = true;
-    game.cells[13].hasBomb = true;
-    game.cells[18].hasBomb = true;
-    game.cells[23].hasBomb = true;
+    this.addBombToCell(game, 3);
+    this.addBombToCell(game, 8);
+    this.addBombToCell(game, 13);
+    this.addBombToCell(game, 18);
+    this.addBombToCell(game, 23);
     game.cells[4].state = CELL_STATES.REVEALED;
     game.cells[9].state = CELL_STATES.TAGGED_FLAG;
     game.cells[14].state = CELL_STATES.TAGGED_QUESTION_MARK;
@@ -37,14 +38,13 @@ module.exports = {
     +---+---+---+---+---+
     */
 
-    game.bombs = 5;
     db.games.push(game);
     return game;
   },
-  createAboutToWinGame: () => {
+  createAboutToWinGame: function() {
     const game = new Game(1, 2, 0);
 
-    game.cells[1].hasBomb = true;
+    this.addBombToCell(game, 1);
 
     /* About-to-win Game
     +---+---+
@@ -52,8 +52,12 @@ module.exports = {
     +---+---+
     */
 
-    game.bombs = 1;
     db.games.push(game);
     return game;
+  },
+  addBombToCell(game, cellId){
+    game.cells[cellId].hasBomb = true;
+    game.bombs++;
+    getAdjacentCells(game.cells, cellId).forEach(x => x.adjacentBombs++);
   },
 };

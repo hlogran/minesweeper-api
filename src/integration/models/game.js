@@ -3,6 +3,7 @@
 const uuidv1 = require('uuid/v1');
 const Cell = require('./cell');
 const {GAME_STATES} = require('../../constants');
+const getAdjacentCells = require('../../utils/getAdjacentCells');
 
 module.exports = class Game {
   constructor(rows = 5, cols = 5, bombs = 5) {
@@ -40,6 +41,7 @@ module.exports = class Game {
       if (!this.cells[i].hasBomb){
         this.cells[i].hasBomb = true;
         bombs--;
+        getAdjacentCells(this.cells, i).forEach(x => x.adjacentBombs++);
       }
     }
   }

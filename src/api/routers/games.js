@@ -27,12 +27,12 @@ router.get('/games/:gameId', getGame, (req, res) => {
 
 // reveal a cell
 router.post('/games/:gameId/cells/:cellId/reveal', getGame, getCell, (req, res) => {
-    try {
-        const game = gamesService.revealCell(req.params.gameId, req.params.cellId);
-        res.json(game);
-    } catch (error){
-        res.status(400).send({error: error.message});
-    }
+  try {
+    const game = gamesService.revealCell(req.params.gameId, req.params.cellId);
+    res.json(game);
+  } catch (error){
+    res.status(400).send({error: error.message});
+  }
 });
 
 // tag a cell
