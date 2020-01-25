@@ -32,29 +32,54 @@ describe('POST /games', () => {
 
   test('Can\'t create a game with 0 cols', async() => {
     await server
-        .post('/games')
-        .send({cols: 0})
-        .expect(400);
+      .post('/games')
+      .send({cols: 0})
+      .expect(400);
 
     expect(db.getGames().length).toBe(0);
   });
 
   test('Can\'t create a game with less than 0 bombs', async() => {
     await server
-        .post('/games')
-        .send({bombs: -1})
-        .expect(400);
+      .post('/games')
+      .send({bombs: -1})
+      .expect(400);
 
     expect(db.getGames().length).toBe(0);
   });
 
   test('Can\'t create a game with more bombs than (cells - 1)', async() => {
     await server
-        .post('/games')
-        .send({rows: 2, cols: 2, bombs: 5})
-        .expect(400);
+      .post('/games')
+      .send({rows: 2, cols: 2, bombs: 5})
+      .expect(400);
 
     expect(db.getGames().length).toBe(0);
   });
 });
 
+describe('GET /games/:gameId', () => {
+
+  let testGame;
+
+  beforeEach(() => {
+    db.clearGames();
+    testGame = db.createTestGame();
+  });
+
+  test('Can get a game by id', async() => {
+    const {body: game} = await server
+      .get(`/games/${testGame.id}`)
+      .expect(200)
+      .expect('Content-Type', /json/);
+
+    expect(game.id).toBe(testGame.id);
+  });
+
+  test('If game is not found returns error 404', async() => {
+    await server
+      .get('/games/NON_EXISTING_ID')
+      .expect(404)
+      .expect('Content-Type', /json/);
+  });
+});
