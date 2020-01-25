@@ -3,7 +3,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const gamesRouter = require('./routers/games');
-const setCors = require('./middlewares/setCors');
+const setCors = require('./middleware/setCors');
 
 const app = express();
 
