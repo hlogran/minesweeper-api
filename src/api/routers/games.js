@@ -3,6 +3,7 @@
 const express = require('express');
 const router = new express.Router; ;
 const gamesService = require('../../services/games.js');
+const getGame = require('../middleware/getGame.js');
 
 // start a game
 router.post('/games', (req, res) => {
@@ -15,14 +16,9 @@ router.post('/games', (req, res) => {
 });
 
 // get a game
-router.get('/games/:gameId', (req, res) => {
+router.get('/games/:gameId', getGame, (req, res) => {
   try {
-    const game = gamesService.get(req.params.gameId);
-    if (game){
-      res.json(game);
-    } else {
-      res.status(404).send({error: 'game not found'});
-    }
+    res.json(req.game);
   } catch (error){
     res.status(400).send();
   }
