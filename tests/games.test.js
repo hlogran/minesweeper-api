@@ -203,7 +203,6 @@ describe('POST /games/:gameId/cells/:cellId/reveal', () => {
         .post(`/games/${gameId}/cells/${cellId}/reveal`)
         .expect(200)
         .expect('Content-Type', /json/);
-      console.log(game);
       expect(game.state).toBe(GAME_STATES.LOST);
     });
 
