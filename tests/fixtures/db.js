@@ -55,5 +55,5 @@ module.exports = {
     game.bombs = 1;
     db.games.push(game);
     return game;
-  }
+  },
 };

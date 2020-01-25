@@ -126,9 +126,9 @@ describe('POST /games/:gameId/cells/:cellId/reveal', () => {
     const gameId = testGame.id;
     const cellId = 4;
     const {body: game} = await server
-        .post(`/games/${gameId}/cells/${cellId}/reveal`)
-        .expect(200)
-        .expect('Content-Type', /json/);
+      .post(`/games/${gameId}/cells/${cellId}/reveal`)
+      .expect(200)
+      .expect('Content-Type', /json/);
     expect(game.cells[cellId].state).toBe(CELL_STATES.REVEALED);
   });
 
@@ -136,9 +136,9 @@ describe('POST /games/:gameId/cells/:cellId/reveal', () => {
     const gameId = testGame.id;
     const cellId = 9;
     const {body: game} = await server
-        .post(`/games/${gameId}/cells/${cellId}/reveal`)
-        .expect(200)
-        .expect('Content-Type', /json/);
+      .post(`/games/${gameId}/cells/${cellId}/reveal`)
+      .expect(200)
+      .expect('Content-Type', /json/);
     expect(game.cells[cellId].state).toBe(CELL_STATES.REVEALED);
   });
 
@@ -146,19 +146,19 @@ describe('POST /games/:gameId/cells/:cellId/reveal', () => {
     const gameId = testGame.id;
     const cellId = 14;
     const {body: game} = await server
-        .post(`/games/${gameId}/cells/${cellId}/reveal`)
-        .expect(200)
-        .expect('Content-Type', /json/);
+      .post(`/games/${gameId}/cells/${cellId}/reveal`)
+      .expect(200)
+      .expect('Content-Type', /json/);
     expect(game.cells[cellId].state).toBe(CELL_STATES.REVEALED);
   });
 
-  test('When a cell with no adjacent mines is revealed, all adjacent squares will be revealed (and repeat)', async() => {
+  test('If no adjacent mines is revealed, all adjacent squares will be revealed (and repeat)', async() => {
     const gameId = testGame.id;
     const cellId = 0;
     const {body: game} = await server
-        .post(`/games/${gameId}/cells/${cellId}/reveal`)
-        .expect(200)
-        .expect('Content-Type', /json/);
+      .post(`/games/${gameId}/cells/${cellId}/reveal`)
+      .expect(200)
+      .expect('Content-Type', /json/);
 
     expect(game.cells[0].state).toBe(CELL_STATES.REVEALED);
     expect(game.cells[1].state).toBe(CELL_STATES.REVEALED);
@@ -200,9 +200,10 @@ describe('POST /games/:gameId/cells/:cellId/reveal', () => {
       const gameId = testGame.id;
       const cellId = 1;
       const {body: game} = await server
-          .post(`/games/${gameId}/cells/${cellId}/reveal`)
-          .expect(200)
-          .expect('Content-Type', /json/);
+        .post(`/games/${gameId}/cells/${cellId}/reveal`)
+        .expect(200)
+        .expect('Content-Type', /json/);
+      console.log(game);
       expect(game.state).toBe(GAME_STATES.LOST);
     });
 
@@ -210,11 +211,11 @@ describe('POST /games/:gameId/cells/:cellId/reveal', () => {
       const gameId = testGame.id;
       const cellId = 0;
       const {body: game} = await server
-          .post(`/games/${gameId}/cells/${cellId}/reveal`)
-          .expect(200)
-          .expect('Content-Type', /json/);
+        .post(`/games/${gameId}/cells/${cellId}/reveal`)
+        .expect(200)
+        .expect('Content-Type', /json/);
       expect(game.state).toBe(GAME_STATES.WON);
     });
 
-  })
+  });
 });
