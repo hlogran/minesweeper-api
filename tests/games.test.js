@@ -162,31 +162,31 @@ describe('POST /games/:gameId/cells/:cellId/reveal', () => {
 
     expect(game.cells[0].state).toBe(CELL_STATES.REVEALED);
     expect(game.cells[1].state).toBe(CELL_STATES.REVEALED);
-    expect(game.cells[2].state).toBe(CELL_STATES.HIDDEN);
+    expect(game.cells[2].state).toBe(CELL_STATES.REVEALED);
     expect(game.cells[3].state).toBe(CELL_STATES.HIDDEN);
     expect(game.cells[4].state).toBe(CELL_STATES.REVEALED);
 
     expect(game.cells[5].state).toBe(CELL_STATES.REVEALED);
     expect(game.cells[6].state).toBe(CELL_STATES.REVEALED);
-    expect(game.cells[7].state).toBe(CELL_STATES.HIDDEN);
+    expect(game.cells[7].state).toBe(CELL_STATES.REVEALED);
     expect(game.cells[8].state).toBe(CELL_STATES.HIDDEN);
     expect(game.cells[9].state).toBe(CELL_STATES.TAGGED_FLAG);
 
     expect(game.cells[10].state).toBe(CELL_STATES.REVEALED);
     expect(game.cells[11].state).toBe(CELL_STATES.REVEALED);
-    expect(game.cells[12].state).toBe(CELL_STATES.HIDDEN);
+    expect(game.cells[12].state).toBe(CELL_STATES.REVEALED);
     expect(game.cells[13].state).toBe(CELL_STATES.HIDDEN);
     expect(game.cells[14].state).toBe(CELL_STATES.TAGGED_QUESTION_MARK);
 
     expect(game.cells[15].state).toBe(CELL_STATES.REVEALED);
     expect(game.cells[16].state).toBe(CELL_STATES.REVEALED);
-    expect(game.cells[17].state).toBe(CELL_STATES.HIDDEN);
+    expect(game.cells[17].state).toBe(CELL_STATES.REVEALED);
     expect(game.cells[18].state).toBe(CELL_STATES.HIDDEN);
     expect(game.cells[19].state).toBe(CELL_STATES.HIDDEN);
 
     expect(game.cells[20].state).toBe(CELL_STATES.REVEALED);
     expect(game.cells[21].state).toBe(CELL_STATES.REVEALED);
-    expect(game.cells[22].state).toBe(CELL_STATES.HIDDEN);
+    expect(game.cells[22].state).toBe(CELL_STATES.REVEALED);
     expect(game.cells[23].state).toBe(CELL_STATES.HIDDEN);
     expect(game.cells[24].state).toBe(CELL_STATES.HIDDEN);
   });
